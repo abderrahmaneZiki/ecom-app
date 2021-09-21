@@ -13,7 +13,8 @@ export class AuthGuard implements CanActivate {
         const request = context.switchToHttp().getRequest();
         if (request) {
             if (!request.headers.authorization) {
-                throw new HttpException('disconnected', HttpStatus.UNAUTHORIZED);
+               // throw new HttpException('disconnected', HttpStatus.UNAUTHORIZED);
+               return true;
             }
             request.user = await this.validateToken(request.headers.authorization);
             return true;
